@@ -1,0 +1,14 @@
+POST https://api.acculynx.com/api/v1/leads HTTP/1.1
+Content-Type: application/json
+Authorization: "Bearer " +secretKey
+
+{
+    "firstName": "yakabe",
+    "lastName": "abe yaya",
+    "emailAdress": "flex4lease.email.com",
+    "phoneNumber1": "+1234567891",
+    "jobCategory": "residential",
+    "street": "6833 n kedzie ave chicago illinois apt 303"
+}
+
+###
