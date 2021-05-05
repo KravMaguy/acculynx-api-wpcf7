@@ -23,9 +23,8 @@ function cf7_form_send_to_acculynx() {
     const rawResponse = await fetch("https://api.acculynx.com/api/v1/leads", {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
-        'Authorization': 'Bearer '+key, 
+        "Authorization": "Bearer "+key, 
       },
       body: JSON.stringify({
         firstName: name,
@@ -39,7 +38,7 @@ function cf7_form_send_to_acculynx() {
     const content = await rawResponse.json();
 
     console.log("server response: ", content);
-  })();
+  })();		
 });
 </script>
     <?php
