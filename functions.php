@@ -32,15 +32,7 @@ function cf7_form_send_to_acculynx($contact_form) {
 				'method'=>'POST',
 				'body'=>$body,
 			);
-			$response=wp_remote_post($url,$args);
-			if ( is_wp_error( $response ) ) {
-    			$error_message = $response->get_error_message();
-    			echo "Something went wrong: $error_message";
-				} else {
-    			echo 'Response:<pre>';
-    			print_r( $response );
-    			echo '</pre>';
-			}			
+			wp_remote_post($url,$args);			
 		}
 	}	    
 }
