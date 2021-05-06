@@ -25,6 +25,7 @@ function cf7_form_send_to_acculynx() {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer "+key, 
+        "mode": "no-cors"
       },
       body: JSON.stringify({
         firstName: name,
