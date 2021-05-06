@@ -19,27 +19,24 @@ function cf7_form_send_to_acculynx() {
   console.log("phone: ", phone);
   console.log("address: ", address);
   console.log("message: ",message)
-  (async () => {
-    const rawResponse = await fetch("https://api.acculynx.com/api/v1/leads", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer "+key, 
-        "mode": "no-cors"
-      },
-      body: JSON.stringify({
+  const url="https://api.acculynx.com/api/v1/leads"
+fetch(url, {
+  headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer "+key, "mode": "no-cors", },
+  method: 'POST',
+  body: JSON.stringify({
         firstName: name,
         emailAdress: email,
         phoneNumber1: phone,
         jobCategory: "residential",
         street: address,
         notes: message,
-      }),
-    });
-    const content = await rawResponse.json();
-
-    console.log("server response: ", content);
-  })();		
+      })
+})
+  .then(response => response.json())
+  .then(success => {
+    console.log(success);
+  })
+.catch(err => console.log(err))
 });
 </script>
     <?php
