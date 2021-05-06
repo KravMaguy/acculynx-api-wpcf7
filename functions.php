@@ -10,16 +10,37 @@ function cf7_form_send_to_acculynx($contact_form) {
 			$posted_data=$submission->get_posted_data();
 			$name=$posted_data['your-name'];
 			$email=$posted_data['your-email'];
-			$telephone=$posted_data['telephone'];
+			$phone=$posted_data['telephone'];
 			$address=$posted_data['your-address'];
 			$message=$posted_data['your-message'];
-			var_dump($name);
-			var_dump($email);
-			var_dump($telephone);
-			var_dump($address);
-			var_dump($message);			
-			wp_die;
 			
+			$url="https://api.acculynx.com/api/v1/leads";
+			$body=[
+				'firstName'=> $name,
+        		'emailAddress'=> $email,
+        		'phoneNumber1'=> $phone,
+        		'jobCategory'=> "residential",
+        		'street'=> $address,
+        		'notes'=> $message,
+			];
+			$body = wp_json_encode($body);
+			$args=array(
+				'headers'=>array(
+					'Authorization' => 'Bearer '. $key,
+					'Content-Type' => 'application/json',
+				),
+				'method'=>'POST',
+				'body'=>$body,
+			);
+			$response=wp_remote_post($url,$args);
+			if ( is_wp_error( $response ) ) {
+    			$error_message = $response->get_error_message();
+    			echo "Something went wrong: $error_message";
+				} else {
+    			echo 'Response:<pre>';
+    			print_r( $response );
+    			echo '</pre>';
+			}			
 		}
 	}	    
 }
